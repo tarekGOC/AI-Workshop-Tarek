@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  spring-boot-skeleton:
+    build: .
+    container_name: spring-boot-skeleton
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

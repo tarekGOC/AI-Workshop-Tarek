@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: skeleton
+
+server:
+  port: 8080
+
+# Spring Boot Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        # Expose health endpoint for verification
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
