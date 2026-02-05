@@ -23,7 +23,7 @@ A minimal FastAPI application template with no endpoints defined. This serves as
 
 ```bash
 # Navigate to the project directory
-cd examples/fastapi-skeleton
+cd skeletons/fastapi-skeleton
 
 # Create virtual environment
 python -m venv venv
@@ -66,7 +66,7 @@ FastAPI automatically generates interactive API documentation:
 
 ```bash
 # Navigate to the project directory
-cd examples/fastapi-skeleton
+cd skeletons/fastapi-skeleton
 
 # Build and start the container
 docker-compose up --build

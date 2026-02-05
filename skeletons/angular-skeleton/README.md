@@ -25,7 +25,7 @@ A minimal Angular application built with TypeScript. This serves as a starting p
 #### 1. Navigate to Project Directory
 
 ```bash
-cd examples/angular-skeleton
+cd skeletons/angular-skeleton
 ```
 
 #### 2. Install Dependencies
@@ -58,7 +58,7 @@ Open your browser and navigate to `http://localhost:4200` to see the application
 
 ```bash
 # Navigate to the project directory
-cd examples/angular-skeleton
+cd skeletons/angular-skeleton
 
 # Build and start the container
 docker-compose up --build

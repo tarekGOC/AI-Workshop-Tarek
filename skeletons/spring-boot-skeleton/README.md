@@ -35,7 +35,7 @@ If you don't have Java 21 installed, download it from:
 
 ```bash
 # Navigate to the project directory
-cd examples/spring-boot-skeleton
+cd skeletons/spring-boot-skeleton
 
 # Build the application (downloads dependencies and compiles)
 ./mvnw clean package
@@ -69,7 +69,7 @@ Spring Boot Actuator provides production-ready endpoints:
 
 ```bash
 # Navigate to the project directory
-cd examples/spring-boot-skeleton
+cd skeletons/spring-boot-skeleton
 
 # Build the JAR file using Maven wrapper
 ./mvnw clean package

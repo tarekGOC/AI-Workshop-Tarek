@@ -25,7 +25,7 @@ A minimal React application built with Vite and TypeScript. This serves as a sta
 #### 1. Navigate to Project Directory
 
 ```bash
-cd examples/react-skeleton
+cd skeletons/react-skeleton
 ```
 
 #### 2. Install Dependencies
@@ -58,7 +58,7 @@ Open your browser and navigate to `http://localhost:5173` to see the application
 
 ```bash
 # Navigate to the project directory
-cd examples/react-skeleton
+cd skeletons/react-skeleton
 
 # Build and start the container
 docker-compose up --build
