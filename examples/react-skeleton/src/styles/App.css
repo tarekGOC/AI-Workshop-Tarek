@@ -1,0 +1,162 @@
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.app-header .logo {
+  height: 6rem;
+  margin-bottom: 1rem;
+  transition: filter var(--transition-duration);
+}
+
+.app-header .logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.app-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.app-header .subtitle {
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+/* Card Styles */
+.info-card,
+.welcome-card,
+.getting-started {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: border-color var(--transition-duration);
+}
+
+.info-card:hover,
+.welcome-card:hover,
+.getting-started:hover {
+  border-color: var(--color-primary);
+}
+
+.info-card h2,
+.welcome-card h2,
+.getting-started h3 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.info-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* Welcome Card Specific Styles */
+.welcome-card {
+  text-align: center;
+}
+
+.counter-section {
+  margin-top: 1.5rem;
+}
+
+.counter-button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.counter-button:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.4);
+}
+
+.counter-button:active {
+  transform: translateY(0);
+}
+
+.counter-message {
+  margin-top: 1rem;
+  font-style: italic;
+  color: var(--color-primary);
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Getting Started Section */
+.getting-started ul {
+  list-style-position: outside;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.getting-started li {
+  margin-bottom: 0.5rem;
+}
+
+.getting-started code {
+  color: var(--color-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .app-header .subtitle {
+    font-size: 1rem;
+  }
+
+  .info-card,
+  .welcome-card,
+  .getting-started {
+    padding: 1.5rem;
+  }
+}
