@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Todo List Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="header">
+                <h1>Todo List Manager</h1>
+            </td>
+        </tr>
+    </table>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <table width="100%" border="0" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td>
+                        {% for category, message in messages %}
+                            <div class="message {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
+    {% endwith %}
+    
+    <table width="100%" border="0" cellpadding="10" cellspacing="0">
+        <tr>
+            <td>
+                <table class="form-table" border="0" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <td colspan="2" class="form-header">Add New Todo</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form method="POST" action="/todos">
+                                <table border="0" cellpadding="3" cellspacing="0">
+                                    <tr>
+                                        <td><b>Title:</b></td>
+                                        <td><input type="text" name="title" size="50" maxlength="100" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top"><b>Description:</b></td>
+                                        <td><textarea name="description" rows="3" cols="50" maxlength="500"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="submit" value="Add Todo" class="button"></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+    <table width="100%" border="0" cellpadding="10" cellspacing="0">
+        <tr>
+            <td>
+                <table class="form-table" border="0" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <td colspan="2" class="form-header">Search & Filter</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form method="GET" action="/search">
+                                <table border="0" cellpadding="3" cellspacing="0">
+                                    <tr>
+                                        <td><b>Search:</b></td>
+                                        <td><input type="text" name="q" size="40" value="{{ search_query or '' }}"></td>
+                                        <td><b>Status:</b></td>
+                                        <td>
+                                            <select name="status">
+                                                <option value="all" {% if filter_status == 'all' %}selected{% endif %}>All</option>
+                                                <option value="completed" {% if filter_status == 'completed' %}selected{% endif %}>Completed</option>
+                                                <option value="incomplete" {% if filter_status == 'incomplete' %}selected{% endif %}>Incomplete</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="submit" value="Search" class="button"></td>
+                                        <td><a href="/" class="button">Clear</a></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+    <table width="100%" border="0" cellpadding="10" cellspacing="0">
+        <tr>
+            <td>
+                <div class="stats">Total Todos: {{ total_count }} | Page {{ page }} of {{ total_pages }}</div>
+            </td>
+        </tr>
+    </table>
+    
+    <table width="100%" border="1" cellpadding="5" cellspacing="0" class="todo-table">
+        <tr class="todo-header">
+            <th width="5%">ID</th>
+            <th width="20%">Title</th>
+            <th width="35%">Description</th>
+            <th width="10%">Status</th>
+            <th width="15%">Created</th>
+            <th width="15%">Actions</th>
+        </tr>
+        {% if todos %}
+            {% for todo in todos %}
+            <tr class="todo-row {% if todo[3] %}completed{% endif %}">
+                <td align="center">{{ todo[0] }}</td>
+                <td><b>{{ todo[1] }}</b></td>
+                <td>{{ todo[2] or '-' }}</td>
+                <td align="center">
+                    <form method="POST" action="/todos/{{ todo[0] }}/toggle" style="display: inline;">
+                        <input type="submit" value="{% if todo[3] %}✓ Complete{% else %}○ Incomplete{% endif %}" class="status-button">
+                    </form>
+                </td>
+                <td align="center">{{ todo[4].strftime('%Y-%m-%d %H:%M') }}</td>
+                <td align="center">
+                    <a href="/todos/{{ todo[0] }}/edit" class="button-small">Edit</a>
+                    <form method="POST" action="/todos/{{ todo[0] }}/delete" style="display: inline;" onsubmit="return confirmDelete('{{ todo[1] }}');">
+                        <input type="submit" value="Delete" class="button-small delete-button">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6" align="center" class="no-todos">No todos found. Add your first todo above!</td>
+            </tr>
+        {% endif %}
+    </table>
+    
+    {% if total_pages > 1 %}
+    <table width="100%" border="0" cellpadding="10" cellspacing="0">
+        <tr>
+            <td align="center" class="pagination">
+                {% if page > 1 %}
+                    <a href="?page={{ page - 1 }}&limit={{ limit }}{% if search_query %}&q={{ search_query }}{% endif %}{% if filter_status %}&status={{ filter_status }}{% endif %}" class="button">Previous</a>
+                {% endif %}
+                
+                {% for p in range(1, total_pages + 1) %}
+                    {% if p == page %}
+                        <span class="current-page">{{ p }}</span>
+                    {% elif p <= 3 or p > total_pages - 3 or (p >= page - 2 and p <= page + 2) %}
+                        <a href="?page={{ p }}&limit={{ limit }}{% if search_query %}&q={{ search_query }}{% endif %}{% if filter_status %}&status={{ filter_status }}{% endif %}" class="button">{{ p }}</a>
+                    {% elif p == 4 or p == total_pages - 3 %}
+                        <span>...</span>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page < total_pages %}
+                    <a href="?page={{ page + 1 }}&limit={{ limit }}{% if search_query %}&q={{ search_query }}{% endif %}{% if filter_status %}&status={{ filter_status }}{% endif %}" class="button">Next</a>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    {% endif %}
+    
+    <script>
+        function confirmDelete(title) {
+            return confirm('Are you sure you want to delete the todo: "' + title + '"?');
+        }
+    </script>
+</body>
+</html>
