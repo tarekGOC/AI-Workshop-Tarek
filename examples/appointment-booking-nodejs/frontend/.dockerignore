@@ -1,0 +1,8 @@
+Dockerfile
+.dockerignore
+node_modules
+src
+.angular
+.editorconfig
+tsconfig*.json
+angular.json

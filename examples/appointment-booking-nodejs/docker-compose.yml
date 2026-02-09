@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: appointment-postgres
+    environment:
+      POSTGRES_DB: appointment_booking
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: apppass123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appuser -d appointment_booking"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: appointment-keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+    command: >
+      start-dev --import-realm
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: appointment-api
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: appointment_booking
+      DB_USER: appuser
+      DB_PASSWORD: apppass123
+      PORT: 3000
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_PUBLIC_URL: http://localhost:8080
+      KEYCLOAK_REALM: appointment-booking
+      KEYCLOAK_CLIENT_ID: appointment-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: appointment-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+      - keycloak
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

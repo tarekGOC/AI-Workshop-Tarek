@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <div class="nav-brand">
+    <a routerLink="/">📅 Appointment Booking</a>
+  </div>
+  <div class="nav-links">
+    <a routerLink="/providers">Providers</a>
+    @if (auth.authenticated()) {
+      <a routerLink="/my-bookings">My Bookings</a>
+    }
+    @if (auth.isProvider()) {
+      <a routerLink="/provider/dashboard">Dashboard</a>
+      <a routerLink="/provider/availability">Availability</a>
+      <a routerLink="/provider/services">Services</a>
+    }
+    <div class="nav-auth">
+      @if (auth.authenticated()) {
+        <span class="user-info">{{ auth.username() }}</span>
+        <button class="btn-nav" (click)="auth.logout()">Logout</button>
+      } @else {
+        <button class="btn-nav btn-login" (click)="auth.login()">Login</button>
+      }
+    </div>
+  </div>
+</nav>
+
+<main>
+  <router-outlet />
+</main>
