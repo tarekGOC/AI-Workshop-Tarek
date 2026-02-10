@@ -100,6 +100,52 @@ Health Check: `http://localhost:8080/actuator/health`
 
 ---
 
+#### 5. Go Skeleton (`go-skeleton/`)
+A minimal Go REST API application template.
+
+**Tech Stack:**
+- Go 1.23 with Chi router
+- Standard middleware (logging, recovery, request ID)
+- Multi-stage Docker build for small images
+- Docker support
+
+**Quick Start:**
+```bash
+cd go-skeleton
+go mod download
+go run ./cmd/server
+```
+
+Access at: `http://localhost:8080`
+Health Check: `http://localhost:8080/health`
+
+[View detailed README](go-skeleton/README.md)
+
+---
+
+#### 6. Rust Skeleton (`rust-skeleton/`)
+A minimal Rust REST API application template.
+
+**Tech Stack:**
+- Rust with Actix Web framework
+- Serde for JSON serialization
+- Structured logging with env_logger
+- Multi-stage Docker build for small images
+- Docker support
+
+**Quick Start:**
+```bash
+cd rust-skeleton
+cargo run
+```
+
+Access at: `http://localhost:8080`
+Health Check: `http://localhost:8080/health`
+
+[View detailed README](rust-skeleton/README.md)
+
+---
+
 ## Common Features
 
 All skeletons include:
@@ -149,6 +195,8 @@ These skeletons are designed to work seamlessly with AI-assisted development too
 
 - **FastAPI** - Choose if you want a modern Python framework with automatic API documentation
 - **Spring Boot** - Choose if you want a mature Java framework with enterprise-grade features
+- **Go** - Choose if you want a high-performance, compiled language with minimal dependencies and small container images
+- **Rust** - Choose if you want maximum performance with memory safety guarantees and zero-cost abstractions
 
 ## Next Steps
 
@@ -168,6 +216,8 @@ These skeletons are designed to work seamlessly with AI-assisted development too
 ### Backend Skeletons
 - **FastAPI**: Python 3.11+, Docker (optional)
 - **Spring Boot**: Java 21 JDK, Docker (optional)
+- **Go**: Go 1.23+, Docker (optional)
+- **Rust**: Rust 1.84+ and Cargo, Docker (optional)
 
 ## Support and Documentation
 
