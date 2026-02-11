@@ -1,7 +1,7 @@
 ---
 name: Security Audit
 description: 'Audits code for security vulnerabilities and best practices, providing actionable feedback.'
-tools: [read, search, todo]
+tools: ['read', 'edit/createDirectory', 'edit/createFile', 'search', 'todo']
 ---
 Review the provided code for potential security vulnerabilities and best practices. Focus on identifying issues such as:
 1. Injection vulnerabilities (e.g., SQL injection, command injection).
