@@ -1,0 +1,60 @@
+.card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: border-color var(--transition-duration);
+}
+
+.card:hover {
+  border-color: var(--color-primary);
+}
+
+.card h2 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.counterSection {
+  margin-top: 1.5rem;
+}
+
+.counterButton {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.counterButton:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.counterButton:active {
+  transform: translateY(0);
+}
+
+.counterMessage {
+  margin-top: 1rem;
+  font-style: italic;
+  color: var(--color-primary);
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

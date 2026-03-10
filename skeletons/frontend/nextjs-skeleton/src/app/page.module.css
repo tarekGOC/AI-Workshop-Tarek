@@ -1,0 +1,111 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.header .logo {
+  height: 6rem;
+  width: 6rem;
+  margin-bottom: 1rem;
+  transition: filter var(--transition-duration);
+}
+
+.header .logo:hover {
+  filter: drop-shadow(0 0 2em var(--color-primary));
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+/* Card Styles */
+.infoCard,
+.gettingStarted {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: border-color var(--transition-duration);
+}
+
+.infoCard:hover,
+.gettingStarted:hover {
+  border-color: var(--color-primary);
+}
+
+.infoCard h2,
+.gettingStarted h3 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.infoCard p:last-child {
+  margin-bottom: 0;
+}
+
+/* Getting Started Section */
+.gettingStarted ul {
+  list-style-position: outside;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+.gettingStarted li {
+  margin-bottom: 0.5rem;
+}
+
+.gettingStarted code {
+  color: var(--color-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .infoCard,
+  .gettingStarted {
+    padding: 1.5rem;
+  }
+}
