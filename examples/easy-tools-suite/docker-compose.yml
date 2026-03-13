@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5005:5005"
+    volumes:
+      - db-data:/app/instance
+    restart: unless-stopped
+
+volumes:
+  db-data:

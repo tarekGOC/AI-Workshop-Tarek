@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolSuite — Productivity Tools</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#6366f1"/><path d="M8 14h12M14 8v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <span>ToolSuite</span>
+            </div>
+        </div>
+        <ul class="nav-list">
+            <li class="nav-item active" data-tool="home"><span class="nav-icon">&#127970;</span>Home</li>
+            <li class="nav-item" data-tool="todos"><span class="nav-icon">&#9745;</span>Todo List</li>
+            <li class="nav-item" data-tool="temperature"><span class="nav-icon">&#127777;</span>Temperature</li>
+            <li class="nav-item" data-tool="password"><span class="nav-icon">&#128274;</span>Password Check</li>
+            <li class="nav-item" data-tool="expenses"><span class="nav-icon">&#128176;</span>Expenses</li>
+            <li class="nav-item" data-tool="quotes"><span class="nav-icon">&#128172;</span>Quote of Day</li>
+            <li class="nav-item" data-tool="contacts"><span class="nav-icon">&#128100;</span>Contacts</li>
+            <li class="nav-item" data-tool="notes"><span class="nav-icon">&#128221;</span>Markdown Notes</li>
+            <li class="nav-item" data-tool="habits"><span class="nav-icon">&#127919;</span>Habit Tracker</li>
+            <li class="nav-item" data-tool="units"><span class="nav-icon">&#128207;</span>Unit Converter</li>
+            <li class="nav-item" data-tool="flashcards"><span class="nav-icon">&#127183;</span>Flashcards</li>
+        </ul>
+    </nav>
+    <main id="main-content">
+        <header id="top-bar">
+            <button id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+            <h1 id="page-title">Todo List</h1>
+        </header>
+        <div id="app-container"></div>
+    </main>
+
+    <div id="modal-overlay" class="hidden">
+        <div id="modal">
+            <div id="modal-header">
+                <h3 id="modal-title"></h3>
+                <button id="modal-close">&times;</button>
+            </div>
+            <div id="modal-body"></div>
+            <div id="modal-footer"></div>
+        </div>
+    </div>
+    <div id="toast-container"></div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
