@@ -1841,6 +1841,26 @@ def create_template(tool):
 
 
 # ---------------------------------------------------------------------------
+# Architecture page (serve ARCHITECTURE.md)
+# ---------------------------------------------------------------------------
+
+@app.route('/api/architecture', methods=['GET'])
+def get_architecture():
+    md_path = os.path.join(os.path.dirname(__file__), 'ARCHITECTURE.md')
+    if not os.path.isfile(md_path):
+        return jsonify({"error": "Architecture doc not found"}), 404
+    with open(md_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    rendered = markdown.markdown(content, extensions=['fenced_code', 'tables', 'codehilite', 'toc'])
+    safe = bleach.clean(rendered, tags=[
+        'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'del', 's',
+        'ul', 'ol', 'li', 'code', 'pre', 'blockquote', 'a', 'img', 'table',
+        'thead', 'tbody', 'tr', 'th', 'td', 'br', 'hr', 'div', 'span',
+    ], attributes={'a': ['href', 'title', 'id', 'name'], 'img': ['src', 'alt', 'title'], 'code': ['class'], 'div': ['class', 'id'], 'span': ['class'], 'h1': ['id'], 'h2': ['id'], 'h3': ['id'], 'h4': ['id'], 'td': ['align'], 'th': ['align']})
+    return jsonify({"html": safe, "raw": content})
+
+
+# ---------------------------------------------------------------------------
 # Init on first request
 # ---------------------------------------------------------------------------
 

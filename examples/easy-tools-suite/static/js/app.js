@@ -121,6 +121,7 @@ function switchTool(name) {
         todos: 'Todo List', temperature: 'Temperature Converter', password: 'Password Strength Checker',
         expenses: 'Expense Tracker', quotes: 'Quote of the Day', contacts: 'Contact Book',
         notes: 'Markdown Notes', habits: 'Habit Tracker', units: 'Unit Converter', flashcards: 'Flashcards',
+        architecture: 'Architecture',
     };
     $('#page-title').textContent = titles[name] || name;
     $('#sidebar').classList.remove('open');
@@ -129,6 +130,7 @@ function switchTool(name) {
         todos: renderTodos, temperature: renderTemperature, password: renderPassword,
         expenses: renderExpenses, quotes: renderQuotes, contacts: renderContacts,
         notes: renderNotes, habits: renderHabits, units: renderUnits, flashcards: renderFlashcards,
+        architecture: renderArchitecture,
     };
     container().innerHTML = '';
     renderers[name]();
@@ -1823,6 +1825,100 @@ async function renderStudyMode(c) {
         }
         showCard();
     }
+}
+
+
+// =========================================================================
+// ARCHITECTURE — Deep Dive
+// =========================================================================
+async function renderArchitecture() {
+    const c = container();
+    c.innerHTML = '';
+
+    // Hero header
+    const hero = h('section', { className: 'arch-hero' },
+        h('div', { className: 'arch-hero-bg' }),
+        h('div', { className: 'arch-hero-content' },
+            h('div', { style: 'font-size: 2.5rem; margin-bottom: .5rem' }, '🏗️'),
+            h('h1', { className: 'arch-hero-title' }, 'Architecture Deep Dive'),
+            h('p', { className: 'arch-hero-sub' }, 'A complete technical walkthrough — from the pixels in your browser down to the bytes on disk.'),
+        ),
+    );
+
+    const content = h('div', { className: 'arch-content', id: 'arch-content' }, 'Loading…');
+    const tocSidebar = h('aside', { className: 'arch-toc', id: 'arch-toc' });
+    const layout = h('div', { className: 'arch-layout' }, tocSidebar, content);
+
+    c.append(hero, layout);
+
+    let data;
+    try {
+        data = await api('/api/architecture');
+    } catch (e) {
+        content.textContent = 'Could not load architecture documentation.';
+        return;
+    }
+    if (data.error) {
+        content.textContent = data.error;
+        return;
+    }
+
+    // Render HTML content
+    content.innerHTML = data.html;
+
+    // Convert mermaid code blocks to visual diagrams (rendered as styled code blocks)
+    content.querySelectorAll('pre code').forEach(block => {
+        const text = block.textContent;
+        if (text.trim().startsWith('graph ') || text.trim().startsWith('sequenceDiagram') ||
+            text.trim().startsWith('erDiagram') || text.trim().startsWith('flowchart')) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'arch-diagram';
+            wrapper.innerHTML = '<div class="arch-diagram-label">📊 Diagram (see ARCHITECTURE.md on GitHub for rendered Mermaid)</div>';
+            const pre = block.closest('pre');
+            // Show as styled code
+            block.className = 'arch-mermaid-src';
+            wrapper.appendChild(pre.cloneNode(true));
+            pre.replaceWith(wrapper);
+        }
+    });
+
+    // Build table of contents from rendered headings
+    const headings = content.querySelectorAll('h1, h2, h3');
+    if (headings.length > 0) {
+        const tocTitle = h('div', { className: 'arch-toc-title' }, '📑 Contents');
+        tocSidebar.appendChild(tocTitle);
+        headings.forEach((heading, i) => {
+            const id = 'arch-heading-' + i;
+            heading.id = id;
+            const level = heading.tagName.toLowerCase();
+            const link = h('a', {
+                className: `arch-toc-link arch-toc-${level}`,
+                href: '#' + id,
+                onClick: (e) => {
+                    e.preventDefault();
+                    heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // highlight active
+                    tocSidebar.querySelectorAll('.arch-toc-link').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            }, heading.textContent);
+            tocSidebar.appendChild(link);
+        });
+    }
+
+    // Scroll spy for TOC
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                tocSidebar.querySelectorAll('.arch-toc-link').forEach(l => {
+                    l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+                });
+            }
+        });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+}
 
     showCard();
 }
