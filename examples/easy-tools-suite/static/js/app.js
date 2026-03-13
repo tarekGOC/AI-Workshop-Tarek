@@ -1919,6 +1919,3 @@ async function renderArchitecture() {
     }, { rootMargin: '-80px 0px -70% 0px' });
     headings.forEach(h => observer.observe(h));
 }
-
-    showCard();
-}
