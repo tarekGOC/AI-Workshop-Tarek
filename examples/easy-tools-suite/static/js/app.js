@@ -774,7 +774,7 @@ async function loadExpenses() {
                     h('button', { className: 'btn-icon', title: 'Delete', onClick: async () => {
                         if (await confirmDialog('Delete this expense?')) {
                             await api(`/api/expenses/${e.id}`, { method: 'DELETE' });
-                            toast('Expense deleted'); loadExpenses();
+                            toast('Expense deleted'); renderExpenses();
                         }
                     } }, '🗑'),
                 ),
@@ -838,7 +838,7 @@ function expenseModal(categories, existing = null) {
                 toast('Expense added');
             }
             closeModal();
-            loadExpenses();
+            renderExpenses();
         } }, existing ? 'Update' : 'Add'),
     );
     showModal(existing ? 'Edit Expense' : 'Add Expense', body, footer);
