@@ -254,13 +254,18 @@ let tourActive = false;
 let tourStep = 0;
 const tourSteps = [
     { tool: 'home', title: 'Welcome to AI Workshop', text: 'This is the live dashboard. It shows real-time stats from all 10 tools — todos, expenses, habits, notes, and more.', target: '.dash-grid' },
-    { tool: 'todos', title: 'Todo List', text: 'Create, edit, search, and complete tasks. Try "Use Template" to load sample data instantly.', target: '.search-bar' },
-    { tool: 'expenses', title: 'Expense Tracker', text: 'Track spending with categories, monthly summaries, and CSV export. Switch between list and summary tabs.', target: '.tabs' },
-    { tool: 'notes', title: 'Markdown Notes', text: 'Write notes in Markdown with live preview, tagging, and full-text search.', target: '#note-list, .card' },
-    { tool: 'habits', title: 'Habit Tracker', text: 'Build daily habits with streak tracking, calendar view, and completion statistics.', target: '.tabs' },
-    { tool: 'flashcards', title: 'Flashcard Study', text: 'Create decks, add cards, and study with a spaced-repetition confidence rating system.', target: '#deck-list, .card' },
+    { tool: 'todos', title: '1. Todo List', text: 'Create, edit, search, and complete tasks with optimistic locking. Supports pagination and full audit logging.', target: '.search-bar' },
+    { tool: 'temperature', title: '2. Temperature Converter', text: 'Convert between Celsius, Fahrenheit, and Kelvin — supports batch conversion with absolute-zero validation.', target: '.card' },
+    { tool: 'password', title: '3. Password Strength Checker', text: 'Real-time scoring with feedback on length, character classes, keyboard patterns, and common password detection. Passwords are never stored.', target: '.card' },
+    { tool: 'expenses', title: '4. Expense Tracker', text: 'Track spending with categories, monthly summaries with bar charts, date filtering, and CSV export.', target: '.tabs' },
+    { tool: 'quotes', title: '5. Quote of the Day', text: 'A new quote every day from a curated collection. Favorite quotes, browse by date, and search by text or author.', target: '.card' },
+    { tool: 'contacts', title: '6. Contact Book', text: 'Manage contacts with search, sorting, duplicate detection, CSV import/export, and email validation.', target: '.search-bar' },
+    { tool: 'notes', title: '7. Markdown Notes', text: 'Write notes in Markdown with live preview, tagging, full-text search, and safe HTML rendering.', target: '#note-list, .card' },
+    { tool: 'habits', title: '8. Habit Tracker', text: 'Build daily habits with streak tracking, calendar heatmap view, and completion rate statistics.', target: '.tabs' },
+    { tool: 'units', title: '9. Unit Converter', text: 'Convert across 5 categories — length, weight, volume, area, and speed — with batch input and conversion history.', target: '.card' },
+    { tool: 'flashcards', title: '10. Flashcard Study', text: 'Create decks, add cards, and study with a spaced-repetition system. Rate cards easy/medium/hard to schedule reviews.', target: '#deck-list, .card' },
     { tool: 'home', title: 'Command Palette', text: 'Press Ctrl+K (or ⌘K) anywhere to open the command palette — search across all tools instantly.', target: '#cmd-palette-btn' },
-    { tool: 'home', title: 'Tour Complete!', text: 'You have explored the full platform. Every tool supports templates, CRUD operations, and audit logging. Start building!', target: '.dash-grid' },
+    { tool: 'home', title: 'Tour Complete!', text: 'You\'ve explored all 10 tools plus the dashboard and command palette. Every tool supports templates, CRUD operations, and audit logging. Start building!', target: '.dash-grid' },
 ];
 
 function startTour() {
