@@ -443,8 +443,8 @@ async function renderTodos() {
     const listEl = h('div', { id: 'todo-list' });
     c.append(searchRow, listEl);
 
-    const load = async (q = '') => {
-        const data = await api(`/api/todos?q=${encodeURIComponent(q)}`);
+    const load = async (q = '', page = 1) => {
+        const data = await api(`/api/todos?q=${encodeURIComponent(q)}&page=${page}`);
         listEl.innerHTML = '';
         if (!data.items.length) { listEl.appendChild(emptyState('☑', 'No todos yet. Create one!')); return; }
         data.items.forEach(t => {
@@ -479,7 +479,7 @@ async function renderTodos() {
             for (let i = 1; i <= pages; i++) {
                 pg.appendChild(h('button', {
                     className: `btn btn-sm ${i === data.page ? 'btn-primary' : 'btn-ghost'}`,
-                    onClick: async () => { const d2 = await api(`/api/todos?page=${i}&q=${encodeURIComponent(q)}`); /* re-render with page */ }
+                    onClick: async () => { load(q, i); }
                 }, String(i)));
             }
             listEl.appendChild(pg);
@@ -703,6 +703,7 @@ function renderPassword() {
 // 4. EXPENSE TRACKER
 // =========================================================================
 let expenseTab = 'list';
+let expenseCategories = [];
 
 async function renderExpenses() {
     const c = container();
@@ -716,6 +717,7 @@ async function renderExpenses() {
     if (expenseTab === 'summary') return renderExpenseSummary(c);
 
     const cats = await api('/api/expenses/categories');
+    expenseCategories = cats.items;
     const toolbar = h('div', { className: 'flex items-center gap-sm flex-wrap mb-2' },
         h('input', { type: 'date', className: 'form-control', id: 'exp-start', style: 'width:160px' }),
         h('span', { className: 'text-sm text-secondary' }, 'to'),
@@ -768,7 +770,8 @@ async function loadExpenses() {
                 h('td', { className: 'text-secondary' }, e.description || '—'),
                 h('td', { style: 'text-align:right;font-weight:600' }, `${e.currency} ${e.amount.toFixed(2)}`),
                 h('td', {},
-                    h('button', { className: 'btn-icon', onClick: async () => {
+                    h('button', { className: 'btn-icon', title: 'Edit', onClick: () => expenseModal(expenseCategories, e) }, '✎'),
+                    h('button', { className: 'btn-icon', title: 'Delete', onClick: async () => {
                         if (await confirmDialog('Delete this expense?')) {
                             await api(`/api/expenses/${e.id}`, { method: 'DELETE' });
                             toast('Expense deleted'); loadExpenses();
@@ -1825,6 +1828,8 @@ async function renderStudyMode(c) {
         }
         showCard();
     }
+
+    showCard();
 }
 
 
