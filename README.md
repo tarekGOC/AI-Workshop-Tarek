@@ -1,6 +1,6 @@
 # AI-Assisted Coding Workshop (Fork)
 
-> **This is a forked version** of the original [AI-Assisted Coding Workshop](https://github.com/cse-cst/ai-workshop) repository maintained by CSE-CST.
+> **This is a forked version** of the original [AI-Assisted Coding Workshop](https://github.com/sdoakey/ai-workshop) repository.
 
 This repository is a workspace for practicing AI-assisted software development with GitHub Copilot. It is organized to help workshop participants explore requirements, start from templates when needed, inspect reference implementations, and build a working delivery workflow around prompting, implementation, testing, and review.
 
