@@ -2,7 +2,7 @@
 
 A full-stack productivity web app bundling **10 everyday tools** into a single, unified interface — built with Flask, SQLite, and vanilla JavaScript.
 
-> **Built 100% with AI assistance** using GitHub Copilot (Agent Mode, Claude Sonnet 4.6) to demonstrate AI-driven development efficiency on an existing codebase.
+> **Part of a forked version** of the [CSE-CST AI Workshop](https://github.com/cse-cst/ai-workshop) repository. Built and maintained **100% with AI assistance** using GitHub Copilot (Agent Mode, Claude Sonnet 4.6) to demonstrate AI-driven development efficiency on an existing codebase.
 
 ---
 

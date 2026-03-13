@@ -1,6 +1,37 @@
-# AI-Assisted Coding Workshop
+# AI-Assisted Coding Workshop (Fork)
+
+> **This is a forked version** of the original [AI-Assisted Coding Workshop](https://github.com/cse-cst/ai-workshop) repository maintained by CSE-CST.
 
 This repository is a workspace for practicing AI-assisted software development with GitHub Copilot. It is organized to help workshop participants explore requirements, start from templates when needed, inspect reference implementations, and build a working delivery workflow around prompting, implementation, testing, and review.
+
+## What's Different in This Fork
+
+This fork adds the **[Easy Tools Suite](examples/easy-tools-suite/)** — a full-stack productivity web app with 10 tools, built and maintained **entirely through GitHub Copilot Agent Mode** (no manual coding). It serves as a practical demonstration of AI-driven development efficiency on a real codebase.
+
+### Added by this fork:
+- [`examples/easy-tools-suite/`](examples/easy-tools-suite/) — 10-in-1 productivity app (Flask + SQLite + vanilla JS)
+- 55+ REST API endpoints, 16 database tables, ~5,000 lines of code
+- In-app architecture documentation with Mermaid diagrams
+- Dashboard, command palette, guided tour, global search
+- Full [ARCHITECTURE.md](examples/easy-tools-suite/ARCHITECTURE.md) and [USER_STORY_COVERAGE.md](examples/easy-tools-suite/USER_STORY_COVERAGE.md) documentation
+
+### Quick Launch — Easy Tools Suite
+
+```bash
+cd examples/easy-tools-suite
+
+# Option A: Docker
+docker compose up --build
+
+# Option B: Local Python
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+Open **http://localhost:5005** in your browser.
+
+See the full [Easy Tools Suite README](examples/easy-tools-suite/README.md) for details.
 
 ## Repository Guide
 
