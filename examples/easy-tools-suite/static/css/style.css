@@ -1318,14 +1318,16 @@ tr:hover td { background: var(--primary-light); }
         radial-gradient(circle at 80% 70%, rgba(16,185,129,.08) 0%, transparent 50%);
     pointer-events: none;
 }
-.arch-hero-content { position: relative; z-index: 1; text-align: center; }
-.arch-hero-title { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
-.arch-hero-sub { font-size: 1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+.arch-hero-content { position: relative; z-index: 1; text-align: center; max-width: 100%; }
+.arch-hero-title { font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: .4rem; word-wrap: break-word; }
+.arch-hero-sub { font-size: 1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6; word-wrap: break-word; }
 
 .arch-layout {
     display: flex;
     gap: 2rem;
     align-items: flex-start;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /* TOC sidebar */
@@ -1372,6 +1374,8 @@ tr:hover td { background: var(--primary-light); }
 .arch-content {
     flex: 1;
     min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -1379,6 +1383,8 @@ tr:hover td { background: var(--primary-light); }
     backdrop-filter: blur(12px);
     line-height: 1.75;
     color: var(--text-secondary);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 .arch-content h1 {
     font-size: 1.6rem; font-weight: 700; color: #fff;
@@ -1424,6 +1430,7 @@ tr:hover td { background: var(--primary-light); }
     overflow-x: auto;
     margin-bottom: 1.2rem;
     line-height: 1.5;
+    max-width: 100%;
 }
 .arch-content pre code {
     background: none;
@@ -1445,6 +1452,8 @@ tr:hover td { background: var(--primary-light); }
     border-collapse: collapse;
     margin-bottom: 1.2rem;
     font-size: .88rem;
+    display: block;
+    overflow-x: auto;
 }
 .arch-content th {
     text-align: left;
